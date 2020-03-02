@@ -1,0 +1,39 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:App1">
+
+    <Style TargetType="local:ItemCustomControl" >
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:ItemCustomControl">
+                    <ItemsControl x:Name="Items"
+                                  ItemsSource="{Binding Items}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}" />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                        <ItemsControl.ItemContainerTransitions>
+                            <TransitionCollection>
+                                <!-- THIS BINDING IS NOT WORKING -->
+                                <EntranceThemeTransition IsStaggeringEnabled="{Binding ElementName=Items, Path=DataContext.IsStaggeringEnabled}"
+                                             FromVerticalOffset="-20"
+                                             FromHorizontalOffset="-20" />
+
+                                <!--<EntranceThemeTransition IsStaggeringEnabled="True"
+                                             FromVerticalOffset="-20"
+                                             FromHorizontalOffset="-20" />-->
+                            </TransitionCollection>
+                        </ItemsControl.ItemContainerTransitions>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Vertical" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
